@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.progressive.bayattraders.helpers.CheckNetwork;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,7 +25,11 @@ public class MainActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                if(new CheckNetwork().isConnected(getApplicationContext())){
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                }else{
+                    Toast.makeText(MainActivity.this, "No internet access, try again", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
