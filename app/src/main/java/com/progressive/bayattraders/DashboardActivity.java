@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.progressive.bayattraders.adapters.DashboardTransAdapter;
+import com.progressive.bayattraders.fragments.SendFragment;
 import com.progressive.bayattraders.fragments.TransactionFragment;
 import com.progressive.bayattraders.fragments.UserFragment;
 import com.progressive.bayattraders.models.DashboardTransactionDetails;
@@ -44,6 +45,14 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 DashboardActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container, new UserFragment(), null).commit();
+            }
+        });
+
+        transfer = findViewById(R.id.img_transfer);
+        transfer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DashboardActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container, new SendFragment(), null).commit();
             }
         });
 
