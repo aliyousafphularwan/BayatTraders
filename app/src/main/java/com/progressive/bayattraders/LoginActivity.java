@@ -9,14 +9,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.progressive.bayattraders.helpers.Constants;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -38,9 +44,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String user = username.getText().toString().trim();
-                String pass = password.getText().toString().trim();
-
                 getLogin();
 
             }
@@ -50,16 +53,21 @@ public class LoginActivity extends AppCompatActivity {
 
     private void getLogin() {
 
+        String user = username.getText().toString().trim();
+        String pass = password.getText().toString().trim();
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.login, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
                 try {
                     JSONObject jo = new JSONObject(response);
-                    String status = jo.getString("stautus");
+                    String status = jo.getString("status");
                     if(status.equals("1")){
                         startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
                         finish();
+                    }else{
+                        Toast.makeText(LoginActivity.this, "wrong username or password", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -71,12 +79,24 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(LoginActivity.this, "Error: Check Internet", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Error:" + error.toString(), Toast.LENGTH_SHORT).show();
 
             }
         }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
 
+                params.put("email", user);
+                params.put("password", pass);
+
+                return params;
+
+            }
         };
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        queue.add(stringRequest);
 
     }
 }
