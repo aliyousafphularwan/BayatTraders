@@ -6,9 +6,12 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.progressive.bayattraders.adapters.DashboardTransAdapter;
 import com.progressive.bayattraders.fragments.SendFragment;
@@ -24,6 +27,7 @@ public class DashboardActivity extends AppCompatActivity {
     public static FragmentManager fragmentManager;
 
     ImageView rates, transfer, user, settings, translist;
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,12 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
 
         getSupportActionBar().hide();
+
+        // get sharedpreferences value
+        prefs = this.getPreferences(Context.MODE_PRIVATE);
+        String id = getResources().getString(R.string.login_user);
+
+        Toast.makeText(this, " ID: " + id, Toast.LENGTH_SHORT).show();
 
         translist = findViewById(R.id.img_translist);
         translist.setOnClickListener(new View.OnClickListener() {

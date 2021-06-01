@@ -2,7 +2,9 @@ package com.progressive.bayattraders;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText username, password;
     Button btnLogin;
-
+    SharedPreferences prefs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +72,14 @@ public class LoginActivity extends AppCompatActivity {
                     JSONObject jo = new JSONObject(response);
                     String status = jo.getString("status");
                     if(status.equals("1")){
+                        String message = jo.getString("message");
+                        String id = String.valueOf(message.equals("id"));
+                        // login session save
+                        prefs = getSharedPreferences(getString(R.string.login_user), Context.MODE_PRIVATE);
+                        SharedPreferences.Editor perfEditor = prefs.edit();
+                        perfEditor.putString(getString(R.string.login_user), id);
+                        perfEditor.apply();
+
                         startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
                         finish();
                     }else{
