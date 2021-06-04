@@ -71,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if(status.equals("1")){
                         Toast.makeText(RegisterActivity.this, "your account created, check your email for login details.", Toast.LENGTH_SHORT).show();
                     }else{
-                        Toast.makeText(RegisterActivity.this, "Error: " + status.equals("message"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Error: " + jo.getString("message"), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
