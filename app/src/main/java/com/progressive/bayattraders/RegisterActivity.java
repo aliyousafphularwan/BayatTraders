@@ -70,8 +70,20 @@ public class RegisterActivity extends AppCompatActivity {
                     String status = jo.getString("status");
                     if(status.equals("1")){
                         Toast.makeText(RegisterActivity.this, "your account created, check your email for login details.", Toast.LENGTH_SHORT).show();
+
+                        et_fname.setText("");
+                        et_lname.setText("");
+                        et_email.setText("");
+                        et_pass.setText("");
+                        et_country.setText("");
+
                     }else{
                         Toast.makeText(RegisterActivity.this, "Error: " + jo.getString("message"), Toast.LENGTH_SHORT).show();
+                        et_fname.setText("");
+                        et_lname.setText("");
+                        et_email.setText("");
+                        et_pass.setText("");
+                        et_country.setText("");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -82,6 +94,11 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(RegisterActivity.this, "Error: check internet connection, & try again", Toast.LENGTH_SHORT).show();
+                et_fname.setText("");
+                et_lname.setText("");
+                et_email.setText("");
+                et_pass.setText("");
+                et_country.setText("");
             }
         }){
             @Override

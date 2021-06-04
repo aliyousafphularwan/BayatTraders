@@ -12,7 +12,7 @@ import com.progressive.bayattraders.helpers.CheckNetwork;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button login;
+    Button login, register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +27,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(new CheckNetwork().isConnected(getApplicationContext())){
                     startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                }else{
+                    Toast.makeText(MainActivity.this, "No internet access, try again", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        register = findViewById(R.id.btnSignupActivity);
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(new CheckNetwork().isConnected(getApplicationContext())){
+                    startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
                 }else{
                     Toast.makeText(MainActivity.this, "No internet access, try again", Toast.LENGTH_SHORT).show();
                 }
