@@ -22,8 +22,13 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
 
     Spinner country;
     ImageView flag;
-    TextView ttlsndngamnt;
+    TextView ttlsndngamnt, ex_rate, rcv_amount;
     EditText send_amount;
+    String ext_afg =  "108.0";
+    String ext_pk =  "206.0";
+    String ext_uae =  "4.5334";
+    String ext_eu =  "0.0";
+    String ext_in =  "1.38";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,6 +37,8 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
         View v = inflater.inflate(R.layout.fragment_send, container, false);
 
         ttlsndngamnt = v.findViewById(R.id.ttlsndngamnt);
+        ex_rate = v.findViewById(R.id.ex_rate);
+        rcv_amount = v.findViewById(R.id.rcv_amount);
 
         country = v.findViewById(R.id.rcv_country);
         country.setOnItemSelectedListener(this);
@@ -43,7 +50,7 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
         send_amount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                send_amount.setText("0");
             }
 
             @Override
@@ -68,26 +75,31 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
             case 0:
                 flag.setImageResource(R.drawable.afghan);
                 flag.setVisibility(View.VISIBLE);
+                ex_rate.setText(String.valueOf(ext_afg));
                 break;
 
             case 1:
                 flag.setImageResource(R.drawable.pakistan);
                 flag.setVisibility(View.VISIBLE);
+                ex_rate.setText(String.valueOf(ext_pk));
                 break;
 
             case 2:
                 flag.setImageResource(R.drawable.uae);
                 flag.setVisibility(View.VISIBLE);
+                ex_rate.setText(String.valueOf(ext_uae));
                 break;
 
             case 3:
                 flag.setImageResource(R.drawable.eu);
                 flag.setVisibility(View.VISIBLE);
+                ex_rate.setText(String.valueOf(ext_eu));
                 break;
 
             case 4:
                 flag.setImageResource(R.drawable.india);
                 flag.setVisibility(View.VISIBLE);
+                ex_rate.setText(String.valueOf(ext_in));
                 break;
 
         }

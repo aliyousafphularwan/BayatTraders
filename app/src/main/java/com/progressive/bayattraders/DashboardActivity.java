@@ -40,7 +40,7 @@ public class DashboardActivity extends AppCompatActivity {
         prefs = this.getPreferences(Context.MODE_PRIVATE);
         String id = getResources().getString(R.string.login_user);
 
-        Toast.makeText(this, " ID: " + id, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, " ID: " + id, Toast.LENGTH_SHORT).show();
 
         translist = findViewById(R.id.img_translist);
         translist.setOnClickListener(new View.OnClickListener() {
