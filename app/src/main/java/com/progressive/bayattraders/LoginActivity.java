@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
                         finish();
                     }else{
-                        Toast.makeText(LoginActivity.this, "wrong username or password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Error:" + status, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
