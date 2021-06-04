@@ -71,14 +71,16 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     JSONObject jo = new JSONObject(response);
                     String status = jo.getString("status");
+                    JSONObject message = jo.getJSONObject("message");
+                    String id = message.getString("id");
                     if(status.equals("1")){
-                        String message = jo.getString("message");
-                        String id = String.valueOf(message.equals("id"));
                         // login session save
-                        prefs = getSharedPreferences(getString(R.string.login_user), Context.MODE_PRIVATE);
+                        prefs = getSharedPreferences("user_id", Context.MODE_PRIVATE);
                         SharedPreferences.Editor perfEditor = prefs.edit();
-                        perfEditor.putString(getString(R.string.login_user), id);
-                        perfEditor.apply();
+                        perfEditor.putString("user_id", id);
+                        perfEditor.commit();
+
+                        Toast.makeText(LoginActivity.this, "saving id: " + id, Toast.LENGTH_SHORT).show();
 
                         startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
                         finish();
