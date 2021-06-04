@@ -50,7 +50,7 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
         send_amount.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                send_amount.setText("0");
+
             }
 
             @Override
