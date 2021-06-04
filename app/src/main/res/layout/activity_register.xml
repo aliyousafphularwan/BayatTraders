@@ -40,24 +40,16 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/reg_fullname"
+            android:id="@+id/reg_fname"
             android:inputType="text"
-            android:hint="Full Name" />
+            android:hint="First Name" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/reg_fathername"
-            android:hint="Father Name"
+            android:id="@+id/reg_lname"
+            android:hint="Last Name"
             android:inputType="text"
-            android:layout_marginTop="10dp"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/reg_phone"
-            android:hint="Phone / Mobile"
-            android:inputType="number"
             android:layout_marginTop="10dp"/>
 
         <EditText
@@ -66,30 +58,6 @@
             android:id="@+id/reg_email"
             android:hint="E-Mail"
             android:inputType="textEmailAddress"
-            android:layout_marginTop="10dp"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/reg_cnic"
-            android:hint="CNIC"
-            android:inputType="number"
-            android:layout_marginTop="10dp"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/reg_city"
-            android:hint="City"
-            android:inputType="text"
-            android:layout_marginTop="10dp"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/reg_address"
-            android:hint="Address"
-            android:inputType="text"
             android:layout_marginTop="10dp"/>
 
         <EditText
