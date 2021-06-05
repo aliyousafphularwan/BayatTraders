@@ -57,7 +57,11 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 ttlsndngamnt.setText(send_amount.getText().toString() + " GBP");
 
+                int val = 100;
+                int amnt = Integer.parseInt( send_amount.getText().toString() );
+                int res = val * amnt;
 
+                rcv_amount.setText(String.valueOf(res));
 
             }
 

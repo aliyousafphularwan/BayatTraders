@@ -26,7 +26,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     public static FragmentManager fragmentManager;
 
-    ImageView rates, transfer, user, settings, translist;
+    ImageView home, trans, send, benif, dots;
     SharedPreferences prefs;
 
     @Override
@@ -42,24 +42,24 @@ public class DashboardActivity extends AppCompatActivity {
 
         Toast.makeText(this, " ID: " + id, Toast.LENGTH_SHORT).show();
 
-        translist = findViewById(R.id.img_translist);
-        translist.setOnClickListener(new View.OnClickListener() {
+        trans = findViewById(R.id.img_trans);
+        trans.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DashboardActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container, new TransactionFragment(), null).commit();
             }
         });
 
-        user = findViewById(R.id.img_user);
-        user.setOnClickListener(new View.OnClickListener() {
+        home = findViewById(R.id.img_home);
+        home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DashboardActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container, new UserFragment(), null).commit();
             }
         });
 
-        transfer = findViewById(R.id.img_transfer);
-        transfer.setOnClickListener(new View.OnClickListener() {
+        send = findViewById(R.id.img_send);
+        send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DashboardActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container, new SendFragment(), null).commit();
