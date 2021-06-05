@@ -56,6 +56,9 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 ttlsndngamnt.setText(send_amount.getText().toString() + " GBP");
+
+
+
             }
 
             @Override

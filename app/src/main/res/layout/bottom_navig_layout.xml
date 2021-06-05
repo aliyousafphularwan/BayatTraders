@@ -8,35 +8,35 @@
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:id="@+id/img_rates"
-        android:src="@drawable/ic_baseline_insert_chart_outlined_24"
+        android:id="@+id/img_home"
+        android:src="@drawable/ic_baseline_home_24"
         android:layout_weight="1"/>
 
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:id="@+id/img_transfer"
+        android:id="@+id/img_trans"
+        android:src="@drawable/ic_baseline_view_headline_24"
+        android:layout_weight="1"/>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/img_send"
         android:src="@drawable/ic_baseline_monetization_on_24"
         android:layout_weight="1"/>
 
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:id="@+id/img_user"
-        android:src="@drawable/ic_baseline_person_24"
-        android:layout_weight="1"/>
-
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:id="@+id/img_settings"
+        android:id="@+id/img_benif_list"
         android:src="@drawable/ic_baseline_settings_24"
         android:layout_weight="1"/>
 
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:id="@+id/img_translist"
+        android:id="@+id/img_dots"
         android:src="@drawable/ic_baseline_more_horiz_24"
         android:layout_weight="1"/>
 
