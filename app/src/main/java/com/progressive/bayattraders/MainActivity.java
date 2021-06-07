@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "No internet access, try again", Toast.LENGTH_SHORT).show();
                 }
 
-                Toast.makeText(MainActivity.this, "Success: " + result.toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "Success: " + result.toString(), Toast.LENGTH_SHORT).show();
             }
 
             @Override

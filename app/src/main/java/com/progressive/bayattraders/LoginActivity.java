@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                         perfEditor.putString("user_id", id);
                         perfEditor.commit();
 
-                        Toast.makeText(LoginActivity.this, "saving id: " + id, Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(LoginActivity.this, "saving id: " + id, Toast.LENGTH_SHORT).show();
 
                         startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
                         finish();

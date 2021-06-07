@@ -22,13 +22,11 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
 
     Spinner country;
     ImageView flag;
-    TextView ttlsndngamnt, ex_rate, rcv_amount;
-    EditText send_amount;
-    String ext_afg =  "108.0";
-    String ext_pk =  "206.0";
-    String ext_uae =  "4.5334";
-    String ext_eu =  "0.0";
-    String ext_in =  "1.38";
+    TextView ttlsndngamnt, ex_rate;
+    EditText send_amount, rcv_amount;
+    double amnt;
+    double res;
+    double ext_rate;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,13 +53,17 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ttlsndngamnt.setText(send_amount.getText().toString() + " GBP");
 
-                int val = 100;
-                int amnt = Integer.parseInt( send_amount.getText().toString() );
-                int res = val * amnt;
+                if(send_amount.getText().toString().equals("")){
+                    send_amount.setText("0");
+                }
+
+                amnt = Double.parseDouble(send_amount.getText().toString());
+                res = amnt * ext_rate;
 
                 rcv_amount.setText(String.valueOf(res));
+
+                ttlsndngamnt.setText(send_amount.getText().toString());
 
             }
 
@@ -82,31 +84,46 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
             case 0:
                 flag.setImageResource(R.drawable.afghan);
                 flag.setVisibility(View.VISIBLE);
-                ex_rate.setText(String.valueOf(ext_afg));
+
+                ext_rate = 1.2;
+                ex_rate.setText(String.valueOf(ext_rate));
+
                 break;
 
             case 1:
                 flag.setImageResource(R.drawable.pakistan);
                 flag.setVisibility(View.VISIBLE);
-                ex_rate.setText(String.valueOf(ext_pk));
+
+                ext_rate = 120;
+                ex_rate.setText(String.valueOf(ext_rate));
+
                 break;
 
             case 2:
                 flag.setImageResource(R.drawable.uae);
                 flag.setVisibility(View.VISIBLE);
-                ex_rate.setText(String.valueOf(ext_uae));
+
+                ext_rate = 150;
+                ex_rate.setText(String.valueOf(ext_rate));
+
                 break;
 
             case 3:
                 flag.setImageResource(R.drawable.eu);
                 flag.setVisibility(View.VISIBLE);
-                ex_rate.setText(String.valueOf(ext_eu));
+
+                ext_rate = 5;
+                ex_rate.setText(String.valueOf(ext_rate));
+
                 break;
 
             case 4:
                 flag.setImageResource(R.drawable.india);
                 flag.setVisibility(View.VISIBLE);
-                ex_rate.setText(String.valueOf(ext_in));
+
+                ext_rate = 75;
+                ex_rate.setText(String.valueOf(ext_rate));
+
                 break;
 
         }
@@ -117,5 +134,8 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
     public void onNothingSelected(AdapterView<?> parent) {
         flag.setImageResource(R.drawable.afghan);
         flag.setVisibility(View.VISIBLE);
+
+        ext_rate = 1.2;
+        ex_rate.setText(String.valueOf(ext_rate));
     }
 }
