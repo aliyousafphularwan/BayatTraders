@@ -113,12 +113,22 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
                             JSONObject data = ja.getJSONObject(i);
                             String name = data.optString("pname");
 
-                            Toast.makeText(getActivity(), "Beneficiary: " + name, Toast.LENGTH_SHORT).show();
+                            List<String> list = new ArrayList<>();
+                            list.add(name);
+
+                            ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, list);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            rcvr.setAdapter(adapter);
 
                         }
 
                     }else{
-                        Toast.makeText(getActivity(), "no record found", Toast.LENGTH_SHORT).show();
+                        List<String> list = new ArrayList<>();
+                        list.add("no beneficiary found");
+
+                        ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, list);
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        rcvr.setAdapter(adapter);
                     }
 
                 } catch (JSONException e) {
