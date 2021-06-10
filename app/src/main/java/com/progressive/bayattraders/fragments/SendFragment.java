@@ -35,13 +35,13 @@ import java.util.List;
 
 public class SendFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    Spinner country;
+    Spinner country, rcvr;
     TextView ttlsndngamnt, ex_rate;
     EditText send_amount, rcv_amount;
     double amnt;
     double res;
     double ext_rate;
-    String company, customer;
+    String company, customer, cid;
     RequestQueue queue;
 
     @Override
@@ -49,6 +49,10 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_send, container, false);
+
+        cid = getActivity().getIntent().getStringExtra("uid");
+
+        rcvr = v.findViewById(R.id.select_Beneficiary);
 
         ttlsndngamnt = v.findViewById(R.id.ttlsndngamnt);
         ex_rate = v.findViewById(R.id.ex_rate);
@@ -87,8 +91,50 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
         });
 
         get_ex_rate();
+        get_benif_data();
 
         return v;
+    }
+
+    private void get_benif_data() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.beneficiary + cid, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject jo = new JSONObject(response);
+                    String status = jo.getString("status");
+                    if(status.equals("1")){
+
+                        JSONArray ja = jo.getJSONArray("message");
+                        for (int i = 0; i < ja.length(); i++){
+
+                            JSONObject data = ja.getJSONObject(i);
+                            String name = data.optString("pname");
+
+                            Toast.makeText(getActivity(), "Beneficiary: " + name, Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    }else{
+                        Toast.makeText(getActivity(), "no record found", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error: " + error, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        queue.add(stringRequest);
+
     }
 
     private void get_ex_rate() {

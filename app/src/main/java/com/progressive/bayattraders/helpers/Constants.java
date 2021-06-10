@@ -7,5 +7,6 @@ public class Constants {
     public static final String signup = URL + "creat_user.php";
     public static final String user = URL + "profile.php";
     public static final String ex_rate = URL + "ex_rate.php";
+    public static final String beneficiary = URL + "beneficiary.php?id=";
 
 }

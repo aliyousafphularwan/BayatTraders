@@ -50,7 +50,7 @@
             android:drawableLeft="@drawable/ic_baseline_lock_24"
             android:drawablePadding="10dp"
             android:layout_marginTop="10dp"
-            android:text="qwertyuiop"/>
+            android:text="123abc"/>
 
         <Button
             android:layout_width="match_parent"
