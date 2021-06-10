@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -31,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText username, password;
     Button btnLogin;
+    ProgressBar progressBar;
     SharedPreferences prefs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
 
         username = findViewById(R.id.login_username);
         password = findViewById(R.id.login_password);
+        progressBar = findViewById(R.id.prog_login);
         btnLogin = findViewById(R.id.btnLogin);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +64,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private void getLogin() {
 
+        btnLogin.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
+
+
         String user = username.getText().toString().trim();
         String pass = password.getText().toString().trim();
 
@@ -75,21 +82,21 @@ public class LoginActivity extends AppCompatActivity {
                     String id = message.getString("id");
                     if(status.equals("1")){
                         // login session save
-                        prefs = getSharedPreferences("user_id", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor perfEditor = prefs.edit();
-                        perfEditor.putString("user_id", id);
-                        perfEditor.commit();
+                        //prefs = getSharedPreferences("user_id", Context.MODE_PRIVATE);
+                        //SharedPreferences.Editor perfEditor = prefs.edit();
+                        //perfEditor.putString("user_id", id);
+                        //perfEditor.commit();
 
-                        // Toast.makeText(LoginActivity.this, "saving id: " + id, Toast.LENGTH_SHORT).show();
-
-                        startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                        Intent i = new Intent(getApplicationContext(), DashboardActivity.class);
+                        i.putExtra("uid", id);
+                        startActivity(i);
                         finish();
-                    }else{
-                        Toast.makeText(LoginActivity.this, "Error:" + status, Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(LoginActivity.this, "", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Error" + e.toString(), Toast.LENGTH_SHORT).show();
+                    btnLogin.setVisibility(View.VISIBLE);
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
 
             }
@@ -98,7 +105,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
                 Toast.makeText(LoginActivity.this, "Error:" + error.toString(), Toast.LENGTH_SHORT).show();
-
+                btnLogin.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.INVISIBLE);
             }
         }){
             @Override

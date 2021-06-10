@@ -36,11 +36,9 @@ public class DashboardActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        // get sharedpreferences value
-        prefs = this.getPreferences(Context.MODE_PRIVATE);
-        String id = prefs.getString("user_id", "");
+        String uid = getIntent().getStringExtra("uid");
 
-        // Toast.makeText(this, " ID: " + id, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "uid: " + uid, Toast.LENGTH_SHORT).show();
 
         trans = findViewById(R.id.img_trans);
         trans.setOnClickListener(new View.OnClickListener() {
