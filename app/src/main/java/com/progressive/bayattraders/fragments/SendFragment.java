@@ -42,7 +42,6 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
     double res;
     double ext_rate;
     String company, customer;
-
     RequestQueue queue;
 
     @Override
@@ -50,8 +49,6 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_send, container, false);
-
-
 
         ttlsndngamnt = v.findViewById(R.id.ttlsndngamnt);
         ex_rate = v.findViewById(R.id.ex_rate);
@@ -75,7 +72,7 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
                 }
 
                 amnt = Double.parseDouble(send_amount.getText().toString());
-                res = amnt * ext_rate;
+                res = amnt * Double.parseDouble(customer);
 
                 rcv_amount.setText(String.valueOf(res));
 
@@ -90,7 +87,6 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
         });
 
         get_ex_rate();
-
 
         return v;
     }
@@ -147,50 +143,27 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         switch (position){
-
             case 0:
-
-                //ext_rate = 1.2;
                 ex_rate.setText(String.valueOf(customer));
-
                 break;
-
             case 1:
-
-                //ext_rate = 120;
                 ex_rate.setText(String.valueOf(customer));
-
                 break;
-
             case 2:
-
-                //ext_rate = 150;
                 ex_rate.setText(String.valueOf(customer));
-
                 break;
-
             case 3:
-
-                //ext_rate = 5;
                 ex_rate.setText(String.valueOf(customer));
-
                 break;
-
             case 4:
-
-                //ext_rate = 75;
                 ex_rate.setText(String.valueOf(customer));
-
                 break;
-
         }
 
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
-        //ext_rate = 1.2;
         ex_rate.setText(String.valueOf(customer));
     }
 }
