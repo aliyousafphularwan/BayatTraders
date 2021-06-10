@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(LoginActivity.this, "Error" + e.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "wrong username or password", Toast.LENGTH_SHORT).show();
                     btnLogin.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.INVISIBLE);
                 }

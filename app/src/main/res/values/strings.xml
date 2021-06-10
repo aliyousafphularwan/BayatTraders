@@ -6,11 +6,11 @@
 
     <string-array name="rcv_country">
 
-        <item> Afghanistan </item>
-        <item> Pakistan </item>
-        <item> UAE </item>
-        <item> EU </item>
-        <item> India </item>
+        <item> AFN </item>
+        <item> PKR </item>
+        <item> UED </item>
+        <item> EURO </item>
+        <item> US$ </item>
 
     </string-array>
 

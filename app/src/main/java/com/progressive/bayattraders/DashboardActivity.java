@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.progressive.bayattraders.adapters.DashboardTransAdapter;
+import com.progressive.bayattraders.fragments.ProfileFragment;
 import com.progressive.bayattraders.fragments.SendFragment;
 import com.progressive.bayattraders.fragments.TransactionFragment;
 import com.progressive.bayattraders.fragments.UserFragment;
@@ -26,7 +27,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     public static FragmentManager fragmentManager;
 
-    ImageView home, trans, send, benif, dots;
+    ImageView home, trans, send, profile, dots;
     SharedPreferences prefs;
 
     @Override
@@ -61,6 +62,14 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DashboardActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container, new SendFragment(), null).commit();
+            }
+        });
+
+        profile = findViewById(R.id.img_profile);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DashboardActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container, new ProfileFragment(), null).commit();
             }
         });
 

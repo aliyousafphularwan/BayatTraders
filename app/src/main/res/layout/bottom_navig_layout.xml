@@ -29,7 +29,7 @@
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:id="@+id/img_benif_list"
+        android:id="@+id/img_profile"
         android:src="@drawable/ic_baseline_settings_24"
         android:layout_weight="1"/>
 
