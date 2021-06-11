@@ -45,7 +45,7 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
     double ext_rate;
     String company, customer, cid;
     RequestQueue queue;
-
+    List<String> list;
     SharedPreferences pref;
 
     @Override
@@ -55,6 +55,7 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
         View v = inflater.inflate(R.layout.fragment_send, container, false);
 
         pref = getActivity().getSharedPreferences("mypref", Context.MODE_PRIVATE);
+        list = new ArrayList<>();
 
         cid = pref.getString("uid", null);
 
@@ -120,7 +121,6 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
                             String name = data.getString("pname");
 
                             if(name != null){
-                                List<String> list = new ArrayList<>();
                                 list.add(name);
 
                                 ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, list);
@@ -174,10 +174,9 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
                             company = comp;
                             customer = cust;
 
-                            List<String> list2 = new ArrayList<>();
-                            list2.add(comp);
+                            list.add(comp);
 
-                            ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, list2);
+                            ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, list);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             country.setAdapter(adapter);
                         }
