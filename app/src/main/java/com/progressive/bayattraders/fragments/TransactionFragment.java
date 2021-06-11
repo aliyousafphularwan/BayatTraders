@@ -41,12 +41,8 @@ public class TransactionFragment extends Fragment {
         rv_trans.setAdapter(dashboardTransAdapter);
 
 
-        getList();
-
         return v;
     }
 
-    private void getList() {
-        list.add(new DashboardTransactionDetails("Ali Yousaf", "240.5", "FX1234567", "12/01/2021" ));
-    }
+
 }

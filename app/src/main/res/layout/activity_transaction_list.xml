@@ -10,31 +10,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/reg_top_text"
-            android:padding="10dp">
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:id="@+id/imginfo"
-                android:layout_centerVertical="true"
-                android:src="@drawable/ic_info"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Transactions"
-                android:layout_toRightOf="@id/imginfo"
-                android:layout_marginLeft="10dp"
-                android:textSize="14dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"/>
-
-        </RelativeLayout>
-
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

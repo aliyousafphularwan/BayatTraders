@@ -2,6 +2,7 @@ package com.progressive.bayattraders;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -47,14 +48,11 @@ public class AddBeneficiaryActivity extends AppCompatActivity {
         et_adrs = findViewById(R.id.brnif_address);
         et_phone = findViewById(R.id.brnif_phone);
 
-
         beneif_list = findViewById(R.id.beneif_list);
         beneif_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Toast.makeText(getApplicationContext(), "Beneficiary List not available", Toast.LENGTH_SHORT).show();
-
+                startActivity(new Intent(getApplicationContext(), BeneficiaryListActivity.class));
             }
         });
 
@@ -73,7 +71,7 @@ public class AddBeneficiaryActivity extends AppCompatActivity {
         String cnic = et_cnic.getText().toString().trim();;
         String adrs = et_adrs.getText().toString().trim();
         String phone = et_phone.getText().toString().trim();
-        String cid = pref.getString("cid", null);
+        String cid = pref.getString("uid", null);
 
         if (TextUtils.isEmpty(name)){
             et_name.setError("Name is Mandatory");

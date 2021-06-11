@@ -11,32 +11,32 @@ import com.progressive.bayattraders.models.DashboardTransactionDetails;
 
 import java.util.ArrayList;
 
-public class TransactionListActivity extends AppCompatActivity {
+public class BeneficiaryListActivity extends AppCompatActivity {
 
+    RecyclerView rcv_beneif_list;
     ArrayList<DashboardTransactionDetails> list;
     DashboardTransAdapter dashboardTransAdapter;
-    RecyclerView rv_trans;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_transaction_list);
+        setContentView(R.layout.activity_beneficiary_list);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Transactions List");
+        getSupportActionBar().setTitle("Beneficiary List");
 
-        rv_trans = findViewById(R.id.frag_trans);
+        rcv_beneif_list = findViewById(R.id.rcv_beneif_list);
         list = new ArrayList<>();
         dashboardTransAdapter = new DashboardTransAdapter(list);
-        rv_trans.setLayoutManager(new LinearLayoutManager(this));
-        rv_trans.setAdapter(dashboardTransAdapter);
+        rcv_beneif_list.setLayoutManager(new LinearLayoutManager(this));
+        rcv_beneif_list.setAdapter(dashboardTransAdapter);
 
-        getList();
+        get_List();
+
 
     }
 
-    private void getList() {
+    private void get_List() {
 
         list.add(new DashboardTransactionDetails("Ali Yousaf", "350", "FX74145247856524", "02/03/2021"));
 
