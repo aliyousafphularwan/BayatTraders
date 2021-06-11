@@ -111,6 +111,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:id="@+id/add_beneif"
                         android:background="@drawable/greyoutlinebg"
                         android:layout_margin="10dp"
                         android:padding="15dp"

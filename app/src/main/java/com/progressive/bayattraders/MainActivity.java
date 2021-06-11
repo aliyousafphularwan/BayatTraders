@@ -2,6 +2,7 @@ package com.progressive.bayattraders;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,10 @@ public class MainActivity extends AppCompatActivity {
     private Executor executor;
     private BiometricPrompt biometricPrompt;
     private BiometricPrompt.PromptInfo promptInfo;
+    SharedPreferences prefs;
+
+    private static final String PREF_NAME = "mypref";
+    private static final String KEY_ID = "uid";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().hide();
+
+        prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
         executor = ContextCompat.getMainExecutor(this);
         biometricPrompt = new BiometricPrompt(MainActivity.this, executor, new BiometricPrompt.AuthenticationCallback() {
@@ -45,7 +52,13 @@ public class MainActivity extends AppCompatActivity {
 
                 if(new CheckNetwork().isConnected(getApplicationContext())){
 
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    String name = prefs.getString(KEY_ID, null);
+
+                    if(name != null){
+                        startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                    }else{
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    }
                 }else{
                     Toast.makeText(MainActivity.this, "No internet access, try again", Toast.LENGTH_SHORT).show();
                 }

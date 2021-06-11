@@ -34,12 +34,18 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     ProgressBar progressBar;
     SharedPreferences prefs;
+
+    private static final String SHRD_PREF = "mypref";
+    private static final String KEY_ID = "uid";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         getSupportActionBar().hide();
+
+        prefs = getSharedPreferences(SHRD_PREF, MODE_PRIVATE);
 
         username = findViewById(R.id.login_username);
         password = findViewById(R.id.login_password);
@@ -82,13 +88,11 @@ public class LoginActivity extends AppCompatActivity {
                     String id = message.getString("id");
                     if(status.equals("1")){
                         // login session save
-                        //prefs = getSharedPreferences("user_id", Context.MODE_PRIVATE);
-                        //SharedPreferences.Editor perfEditor = prefs.edit();
-                        //perfEditor.putString("user_id", id);
-                        //perfEditor.commit();
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString(KEY_ID, id);
+                        editor.apply();
 
                         Intent i = new Intent(getApplicationContext(), DashboardActivity.class);
-                        i.putExtra("uid", id);
                         startActivity(i);
                         finish();
                     }

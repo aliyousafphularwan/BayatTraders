@@ -37,10 +37,6 @@ public class DashboardActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        String uid = getIntent().getStringExtra("uid");
-
-        Toast.makeText(this, "uid: " + uid, Toast.LENGTH_SHORT).show();
-
         trans = findViewById(R.id.img_trans);
         trans.setOnClickListener(new View.OnClickListener() {
             @Override

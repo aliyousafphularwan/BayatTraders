@@ -1,5 +1,6 @@
 package com.progressive.bayattraders.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import com.progressive.bayattraders.Add_Beneficiary_Activity;
 import com.progressive.bayattraders.R;
 import com.progressive.bayattraders.adapters.DashboardTransAdapter;
 import com.progressive.bayattraders.models.DashboardTransactionDetails;
@@ -20,6 +23,7 @@ public class UserFragment extends Fragment {
 
     RecyclerView rv_trans;
     DashboardTransAdapter dashboardTransAdapter;
+    LinearLayout add_beneif;
     private ArrayList<DashboardTransactionDetails> list;
 
     public UserFragment() {
@@ -37,6 +41,16 @@ public class UserFragment extends Fragment {
         rv_trans.setLayoutManager(new LinearLayoutManager(getContext()));
         dashboardTransAdapter = new DashboardTransAdapter(list);
         rv_trans.setAdapter(dashboardTransAdapter);
+
+        add_beneif = v.findViewById(R.id.add_beneif);
+        add_beneif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(new Intent(getActivity(), Add_Beneficiary_Activity.class));
+
+            }
+        });
 
         transInfo();
 

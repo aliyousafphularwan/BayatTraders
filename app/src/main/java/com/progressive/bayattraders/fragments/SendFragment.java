@@ -1,5 +1,7 @@
 package com.progressive.bayattraders.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -44,13 +46,17 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
     String company, customer, cid;
     RequestQueue queue;
 
+    SharedPreferences pref;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_send, container, false);
 
-        cid = getActivity().getIntent().getStringExtra("uid");
+        pref = getActivity().getSharedPreferences("mypref", Context.MODE_PRIVATE);
+
+        cid = pref.getString("uid", null);
 
         rcvr = v.findViewById(R.id.select_Beneficiary);
 
@@ -111,24 +117,26 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
                         for (int i = 0; i < ja.length(); i++){
 
                             JSONObject data = ja.getJSONObject(i);
-                            String name = data.optString("pname");
+                            String name = data.getString("pname");
 
-                            List<String> list = new ArrayList<>();
-                            list.add(name);
+                            if(name != null){
+                                List<String> list = new ArrayList<>();
+                                list.add(name);
 
-                            ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, list);
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            rcvr.setAdapter(adapter);
+                                ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, list);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                rcvr.setAdapter(adapter);
+                            }else{
+                                List<String> list = new ArrayList<>();
+                                list.add("no beneficiary found.");
+
+                                ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, list);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                rcvr.setAdapter(adapter);
+                            }
 
                         }
 
-                    }else{
-                        List<String> list = new ArrayList<>();
-                        list.add("no beneficiary found");
-
-                        ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, list);
-                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        rcvr.setAdapter(adapter);
                     }
 
                 } catch (JSONException e) {
@@ -161,15 +169,15 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
                         JSONArray msg = jo.getJSONArray("message");
                         for(int i = 0; i < msg.length(); i++){
                             JSONObject data = msg.getJSONObject(i);
-                            String comp = data.optString("company");
-                            String cust = data.optString("cust_rate");
+                            String comp = data.getString("company");
+                            String cust = data.getString("cust_rate");
                             company = comp;
                             customer = cust;
 
-                            List<String> list = new ArrayList<>();
-                            list.add(comp);
+                            List<String> list2 = new ArrayList<>();
+                            list2.add(comp);
 
-                            ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, list);
+                            ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, list2);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             country.setAdapter(adapter);
                         }
