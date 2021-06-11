@@ -12,8 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.progressive.bayattraders.Add_Beneficiary_Activity;
+import com.progressive.bayattraders.AddBeneficiaryActivity;
+import com.progressive.bayattraders.AddDocsActivity;
 import com.progressive.bayattraders.R;
+import com.progressive.bayattraders.TransactionListActivity;
 import com.progressive.bayattraders.adapters.DashboardTransAdapter;
 import com.progressive.bayattraders.models.DashboardTransactionDetails;
 
@@ -23,7 +25,7 @@ public class UserFragment extends Fragment {
 
     RecyclerView rv_trans;
     DashboardTransAdapter dashboardTransAdapter;
-    LinearLayout add_beneif;
+    LinearLayout trans_list, add_beneif, add_docs, resue_trans;
     private ArrayList<DashboardTransactionDetails> list;
 
     public UserFragment() {
@@ -47,8 +49,24 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(getActivity(), Add_Beneficiary_Activity.class));
+                startActivity(new Intent(getActivity(), AddBeneficiaryActivity.class));
 
+            }
+        });
+
+        trans_list = v.findViewById(R.id.trans_list);
+        trans_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), TransactionListActivity.class));
+            }
+        });
+
+        add_docs = v.findViewById(R.id.add_docs);
+        add_docs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), AddDocsActivity.class));
             }
         });
 

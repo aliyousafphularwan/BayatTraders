@@ -4,15 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class Add_Beneficiary_Activity extends AppCompatActivity {
+public class TransactionListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_beneficiary);
+        setContentView(R.layout.activity_transaction_list);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Add Beneficiary");
+        getSupportActionBar().setTitle("Transactions List");
 
     }
 }

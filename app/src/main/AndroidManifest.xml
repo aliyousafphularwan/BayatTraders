@@ -13,7 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
-        <activity android:name=".Add_Beneficiary_Activity" android:parentActivityName=".DashboardActivity"></activity>
+        <activity android:name=".AddDocsActivity" android:parentActivityName=".DashboardActivity"></activity>
+        <activity
+            android:name=".TransactionListActivity"
+            android:parentActivityName=".DashboardActivity" />
+        <activity
+            android:name=".AddBeneficiaryActivity"
+            android:parentActivityName=".DashboardActivity" />
         <activity android:name=".DashboardActivity" />
         <activity
             android:name=".RegisterActivity"
