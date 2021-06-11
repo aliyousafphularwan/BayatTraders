@@ -48,15 +48,5 @@ public class TransactionFragment extends Fragment {
 
     private void getList() {
         list.add(new DashboardTransactionDetails("Ali Yousaf", "240.5", "FX1234567", "12/01/2021" ));
-        list.add(new DashboardTransactionDetails("Ali Yousaf", "240.5", "FX1234567", "12/01/2021" ));
-        list.add(new DashboardTransactionDetails("Ali Yousaf", "240.5", "FX1234567", "12/01/2021" ));
-        list.add(new DashboardTransactionDetails("Ali Yousaf", "240.5", "FX1234567", "12/01/2021" ));
-        list.add(new DashboardTransactionDetails("Ali Yousaf", "240.5", "FX1234567", "12/01/2021" ));
-        list.add(new DashboardTransactionDetails("Ali Yousaf", "240.5", "FX1234567", "12/01/2021" ));
-        list.add(new DashboardTransactionDetails("Ali Yousaf", "240.5", "FX1234567", "12/01/2021" ));
-        list.add(new DashboardTransactionDetails("Ali Yousaf", "240.5", "FX1234567", "12/01/2021" ));
-        list.add(new DashboardTransactionDetails("Ali Yousaf", "240.5", "FX1234567", "12/01/2021" ));
-        list.add(new DashboardTransactionDetails("Ali Yousaf", "240.5", "FX1234567", "12/01/2021" ));
-        list.add(new DashboardTransactionDetails("Ali Yousaf", "240.5", "FX1234567", "12/01/2021" ));
     }
 }
