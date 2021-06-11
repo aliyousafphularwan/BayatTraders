@@ -75,7 +75,7 @@ public class BeneficiaryListActivity extends AppCompatActivity {
 
                             String name = data.getString("pname");
 
-                            Toast.makeText(BeneficiaryListActivity.this, "name: " + name, Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(BeneficiaryListActivity.this, "name: " + name, Toast.LENGTH_SHORT).show();
 
                             list.add(new DashboardTransactionDetails(name, "", "", ""));
 

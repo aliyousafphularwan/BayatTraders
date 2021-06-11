@@ -45,7 +45,7 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
     double ext_rate;
     String company, customer, cid;
     RequestQueue queue;
-    List<String> list;
+    List<String> listComp, listBeneif;
     SharedPreferences pref;
 
     @Override
@@ -55,7 +55,11 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
         View v = inflater.inflate(R.layout.fragment_send, container, false);
 
         pref = getActivity().getSharedPreferences("mypref", Context.MODE_PRIVATE);
-        list = new ArrayList<>();
+
+        listComp = new ArrayList<>();
+        listBeneif = new ArrayList<>();
+
+        Toast.makeText(getActivity(), "rate: " + customer, Toast.LENGTH_SHORT).show();
 
         cid = pref.getString("uid", null);
 
@@ -121,9 +125,9 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
                             String name = data.getString("pname");
 
                             if(name != null){
-                                list.add(name);
+                                listBeneif.add(name);
 
-                                ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, list);
+                                ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, listBeneif);
                                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                 rcvr.setAdapter(adapter);
                             }else{
@@ -171,12 +175,15 @@ public class SendFragment extends Fragment implements AdapterView.OnItemSelected
                             JSONObject data = msg.getJSONObject(i);
                             String comp = data.getString("company");
                             String cust = data.getString("cust_rate");
+
+                            // Toast.makeText(getActivity(), "rate: " + cust, Toast.LENGTH_SHORT).show();
                             company = comp;
                             customer = cust;
 
-                            list.add(comp);
+                            listComp.add(comp);
+                            //listComp.add(cust);
 
-                            ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, list);
+                            ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, listComp);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             country.setAdapter(adapter);
                         }
