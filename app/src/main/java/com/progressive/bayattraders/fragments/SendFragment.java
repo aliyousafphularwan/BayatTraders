@@ -27,6 +27,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.progressive.bayattraders.R;
 import com.progressive.bayattraders.helpers.Constants;
+import com.progressive.bayattraders.helpers.ExchangeRates;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,9 +41,11 @@ public class SendFragment extends Fragment{
     Spinner country, rcvr;
     EditText send_amount;
     TextView rcv_amount, ex_rate, ttlsndngamnt;
-    String company, customer, cid;
+    public String cid;
     RequestQueue queue;
-    List<String> listComp, listBeneif;
+    List<String> listBeneif;
+    ArrayList<ExchangeRates> listComp;
+    ArrayAdapter adapter;
     SharedPreferences pref;
 
     @Override
@@ -51,22 +54,47 @@ public class SendFragment extends Fragment{
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_send, container, false);
 
+        send_amount = v.findViewById(R.id.send_amount);
+        rcv_amount = v.findViewById(R.id.rcv_amount);
+        ex_rate = v.findViewById(R.id.ex_rate);
+        ttlsndngamnt = v.findViewById(R.id.ttlsndngamnt);
+
+        send_amount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // rcv_amount.setText(send_amount.getText());
+                ttlsndngamnt.setText(send_amount.getText());
+
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
         // get value from login session
         pref = getActivity().getSharedPreferences("mypref", Context.MODE_PRIVATE);
         cid = pref.getString("uid", null);
-
-        listComp = new ArrayList<>();
+        listComp = new ArrayList<ExchangeRates>();
         listBeneif = new ArrayList<>();
-
         rcvr = v.findViewById(R.id.select_Beneficiary);
         country = v.findViewById(R.id.rcv_country);
-
+        country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ExchangeRates exchangeRates = (ExchangeRates) parent.getItemAtPosition(position);
+                ex_rate.setText(exchangeRates.rate);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Toast.makeText(getActivity(), "Position" + parent, Toast.LENGTH_SHORT).show();
+            }
+        });
         get_ex_rate();
         get_benif_data();
-
         return v;
     }
-
     private void get_benif_data() {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.beneficiary + cid, new Response.Listener<String>() {
@@ -118,7 +146,6 @@ public class SendFragment extends Fragment{
         queue.add(stringRequest);
 
     }
-
     private void get_ex_rate() {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.ex_rate, new Response.Listener<String>() {
@@ -136,9 +163,9 @@ public class SendFragment extends Fragment{
                             String comp = data.getString("company");
                             String cust = data.getString("cust_rate");
 
-                            listComp.add(comp);
+                            listComp.add(new ExchangeRates(comp, cust));
 
-                            ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, listComp);
+                            adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, listComp);
                             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             country.setAdapter(adapter);
                         }
