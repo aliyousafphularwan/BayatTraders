@@ -37,12 +37,130 @@ import java.util.List;
 
 public class SendFragment extends Fragment{
 
+    Spinner country, rcvr;
+    EditText send_amount;
+    TextView rcv_amount, ex_rate, ttlsndngamnt;
+    String company, customer, cid;
+    RequestQueue queue;
+    List<String> listComp, listBeneif;
+    SharedPreferences pref;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_send, container, false);
+
+        // get value from login session
+        pref = getActivity().getSharedPreferences("mypref", Context.MODE_PRIVATE);
+        cid = pref.getString("uid", null);
+
+        listComp = new ArrayList<>();
+        listBeneif = new ArrayList<>();
+
+        rcvr = v.findViewById(R.id.select_Beneficiary);
+        country = v.findViewById(R.id.rcv_country);
+
+        get_ex_rate();
+        get_benif_data();
+
         return v;
     }
 
+    private void get_benif_data() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.beneficiary + cid, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject jo = new JSONObject(response);
+                    String status = jo.getString("status");
+                    if(status.equals("1")){
+
+                        JSONArray ja = jo.getJSONArray("message");
+                        for (int i = 0; i < ja.length(); i++){
+
+                            JSONObject data = ja.getJSONObject(i);
+                            String name = data.getString("pname");
+
+                            if(name != null){
+                                listBeneif.add(name);
+
+                                ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, listBeneif);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                rcvr.setAdapter(adapter);
+                            }else{
+                                List<String> list = new ArrayList<>();
+                                list.add("no beneficiary found.");
+
+                                ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, list);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                rcvr.setAdapter(adapter);
+                            }
+
+                        }
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error: " + error, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        queue.add(stringRequest);
+
+    }
+
+    private void get_ex_rate() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Constants.ex_rate, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject jo = new JSONObject(response);
+                    String status = jo.getString("status");
+                    if (status.equals("1")){
+
+                        JSONArray msg = jo.getJSONArray("message");
+                        for(int i = 0; i < msg.length(); i++){
+                            JSONObject data = msg.getJSONObject(i);
+                            String comp = data.getString("company");
+                            String cust = data.getString("cust_rate");
+
+                            listComp.add(comp);
+
+                            ArrayAdapter adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, listComp);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            country.setAdapter(adapter);
+                        }
+
+                    }else{
+                        Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(), "Error: " + e.toString(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "error: " + error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        queue = Volley.newRequestQueue(getActivity());
+        queue.add(stringRequest);
+
+    }
 }
