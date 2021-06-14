@@ -84,9 +84,11 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     JSONObject jo = new JSONObject(response);
                     String status = jo.getString("status");
-                    JSONObject message = jo.getJSONObject("message");
-                    String id = message.getString("id");
+                    String msg = jo.getString("message");
+
                     if(status.equals("1")){
+                        JSONObject message = jo.getJSONObject("message");
+                        String id = message.getString("id");
                         // login session save
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putString(KEY_ID, id);
@@ -95,10 +97,14 @@ public class LoginActivity extends AppCompatActivity {
                         Intent i = new Intent(getApplicationContext(), DashboardActivity.class);
                         startActivity(i);
                         finish();
+                    }else{
+                        Toast.makeText(LoginActivity.this, "message: " + msg, Toast.LENGTH_SHORT).show();
+                        btnLogin.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.INVISIBLE);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    Toast.makeText(LoginActivity.this, "wrong username or password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "error: " + e, Toast.LENGTH_SHORT).show();
                     btnLogin.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.INVISIBLE);
                 }
