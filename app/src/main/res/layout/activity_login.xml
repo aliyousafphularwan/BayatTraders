@@ -33,8 +33,7 @@
             android:paddingVertical="15dp"
             android:paddingHorizontal="10dp"
             android:drawableLeft="@drawable/ic_baseline_account_box_24"
-            android:drawablePadding="10dp"
-            android:text="ali@gmail.com"/>
+            android:drawablePadding="10dp"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -49,8 +48,7 @@
             android:paddingHorizontal="10dp"
             android:drawableLeft="@drawable/ic_baseline_lock_24"
             android:drawablePadding="10dp"
-            android:layout_marginTop="10dp"
-            android:text="123@abc"/>
+            android:layout_marginTop="10dp"/>
 
         <Button
             android:layout_width="match_parent"
