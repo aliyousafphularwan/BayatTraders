@@ -65,7 +65,10 @@ public class SendFragment extends Fragment{
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // rcv_amount.setText(send_amount.getText());
+
+                String snd = send_amount.getText().toString();
+
+                rcv_amount.setText(String.valueOf( Double.parseDouble(snd) * 120 ));
                 ttlsndngamnt.setText(send_amount.getText());
 
             }
